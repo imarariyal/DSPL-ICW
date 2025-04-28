@@ -4,13 +4,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# Load the dataset
-@st.cache_data
-def load_data():
-    df = pd.read_csv('cleaned_indicators_lka.csv')
-    return df
-
-df = load_data()
+# Load cleaned dataset
+df = pd.read_csv('cleaned_indicators_lka.csv')
 
 # Set page config
 st.set_page_config(
@@ -260,11 +255,3 @@ except:
 st.markdown("---")
 st.subheader("Raw Data")
 st.dataframe(filtered_df.sort_values(['Indicator', 'Year']), use_container_width=True)
-
-# Add download button
-st.download_button(
-    label="Download Filtered Data as CSV",
-    data=filtered_df.to_csv(index=False).encode('utf-8'),
-    file_name='sri_lanka_indicators_filtered.csv',
-    mime='text/csv'
-)
