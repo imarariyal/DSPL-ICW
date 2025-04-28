@@ -6,11 +6,8 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 # --- Load dataset ---
-@st.cache_data
-def load_data():
-    return pd.read_csv('cleaned_indicators_lka.csv')
+df= pd.read_csv('cleaned_indicators_lka.csv')
 
-df = load_data()
 
 # --- Streamlit page config ---
 st.set_page_config(page_title="Sri Lanka Indicators Dashboard", page_icon="🇱🇰", layout="wide")
