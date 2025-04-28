@@ -17,7 +17,7 @@ page = st.sidebar.selectbox("Navigation", ["About", "Home", "Advanced Analysis"]
 # About Page
 if page == "About":
     st.title("📚 About this Dashboard")
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Coat_of_arms_of_Sri_Lanka.svg/1200px-Coat_of_arms_of_Sri_Lanka.svg.png", width=150)
+    st.image("https://cdn-wordpress-info.futurelearn.com/wp-content/uploads/how-does-the-economy-work-606x303.jpg.webp", width=150)
 
     st.markdown("""
     ## 🇱🇰 Sri Lanka Economic and Social Indicators Dashboard
