@@ -253,5 +253,4 @@ except:
 
 # Add data table
 st.markdown("---")
-st.subheader("Raw Data")
 st.dataframe(filtered_df.sort_values(['Indicator', 'Year']), use_container_width=True)
