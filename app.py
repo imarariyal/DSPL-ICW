@@ -5,18 +5,18 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# --- Load data ---
+# Load data
 df = pd.read_csv('cleaned_indicators_lka.csv')
 
-# --- Page config ---
+# Page config 
 st.set_page_config(page_title="Sri Lanka Indicators Dashboard", page_icon="🇱🇰", layout="wide")
 
-# --- Sidebar Navigation (About first) ---
+# Sidebar Navigation (About first) 
 page = st.sidebar.selectbox("Navigation", ["About", "Home", "Advanced Analysis"])
 
-# --- About Page ---
+# About Page
 if page == "About":
-    st.title("📚 About this Project")
+    st.title("📚 About this Dashboard")
     st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Coat_of_arms_of_Sri_Lanka.svg/1200px-Coat_of_arms_of_Sri_Lanka.svg.png", width=150)
 
     st.markdown("""
@@ -54,7 +54,7 @@ if page == "About":
     **Author:** Imara Riyal
     """)
 
-# --- Home Page ---
+# Home Page 
 if page == "Home":
     # Sidebar filters
     st.sidebar.title("Filters")
@@ -96,7 +96,7 @@ if page == "Home":
             fig.update_layout(hovermode='x unified')
             st.plotly_chart(fig, use_container_width=True)
 
-    # --- Tab 2: Comparative Analysis ---
+    # Tab 2: Comparative Analysis 
     with tab2:
         st.header("Comparative Analysis")
         if len(selected_indicators) >= 2:
@@ -119,7 +119,7 @@ if page == "Home":
         else:
             st.warning("Please select at least two indicators.")
 
-    # --- Tab 3: Indicators Deep Dive ---
+    # Tab 3: Indicators Deep Dive 
     with tab3:
         st.header("Indicators Deep Dive")
 
@@ -138,7 +138,7 @@ if page == "Home":
         else:
             st.warning("No data available for selected filters.")
 
-    # --- KPIs ---
+    # KPIs
     st.markdown("---")
     st.subheader("Key Metrics")
 
@@ -156,12 +156,12 @@ if page == "Home":
     else:
         st.info("No data to show KPIs.")
 
-    # --- Raw Data ---
+    # Raw Data 
     st.markdown("---")
     st.subheader("Raw Data Table")
     st.dataframe(filtered_df.sort_values(['Indicator', 'Year']), use_container_width=True)
 
-# --- Advanced Analysis Page ---
+# Advanced Analysis Page
 if page == "Advanced Analysis":
     st.title("📊 Advanced Data Analysis")
 
