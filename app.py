@@ -18,8 +18,7 @@ page = st.sidebar.selectbox("Navigation", ["About", "Home", "Advanced Analysis"]
 if page == "About":
     st.title("📚 About this Dashboard")
     st.image(
-    "https://cdn-wordpress-info.futurelearn.com/wp-content/uploads/how-does-the-economy-work-606x303.jpg.webp", 
-    caption="How the Economy Works", 
+    "https://cdn-wordpress-info.futurelearn.com/wp-content/uploads/how-does-the-economy-work-606x303.jpg.webp",  
     use_column_width=True
     )
 
