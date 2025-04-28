@@ -6,13 +6,53 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 # --- Load data ---
-df= pd.read_csv('cleaned_indicators_lka.csv')
+df = pd.read_csv('cleaned_indicators_lka.csv')
 
 # --- Page config ---
 st.set_page_config(page_title="Sri Lanka Indicators Dashboard", page_icon="🇱🇰", layout="wide")
 
-# --- Sidebar Navigation ---
-page = st.sidebar.selectbox("Navigation", ["Home", "Advanced Analysis", "About"])
+# --- Sidebar Navigation (About first) ---
+page = st.sidebar.selectbox("Navigation", ["About", "Home", "Advanced Analysis"])
+
+# --- About Page ---
+if page == "About":
+    st.title("📚 About this Project")
+    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Coat_of_arms_of_Sri_Lanka.svg/1200px-Coat_of_arms_of_Sri_Lanka.svg.png", width=150)
+
+    st.markdown("""
+    ## 🇱🇰 Sri Lanka Economic and Social Indicators Dashboard
+
+    This dashboard visualises economic and social indicators for Sri Lanka between 2000 and 2023.
+    It provides interactive tools to explore historical data trends, relationships between different indicators, and advanced statistical analyses.
+
+    ### Key Features:
+    - 📈 Interactive line charts and comparisons
+    - 🧮 KPI metrics summary
+    - 📊 Univariate, Bivariate and Multivariate analysis
+    - 🗃️ Raw data exploration
+    - 🔥 Correlation heatmaps for multivariate insights
+
+    ### About the Dataset:
+    The dataset used in this project is the **World Bank Combined Indicators for Sri Lanka**, publicly available from the Humanitarian Data Exchange (HDX).
+    
+    #### Key Highlights:
+    - Covers economic, health, education, infrastructure, and environmental indicators
+    - Time span: 2000 to 2023
+    - Includes GDP, Inflation, Exports, Imports, FDI, Life Expectancy, Population Growth, Energy Use, and more
+    - Collected and maintained by the World Bank for reliability and global standards
+    
+    This dataset provides a comprehensive view of Sri Lanka’s socio-economic trends, useful for researchers, students, and policymakers.
+
+    **Source:** [World Bank Combined Indicators for Sri Lanka (HDX)](https://data.humdata.org/dataset/world-bank-combined-indicators-for-sri-lanka)
+
+    ### Built With:
+    - Python 🐍
+    - Streamlit 🚀
+    - Plotly 📈
+    - Pandas 🐼
+
+    **Author:** Imara Riyal
+    """)
 
 # --- Home Page ---
 if page == "Home":
@@ -23,7 +63,7 @@ if page == "Home":
     selected_indicators = st.sidebar.multiselect(
         "Select Indicators:",
         options=all_indicators,
-        default=list(all_indicators)[:5]  # default: first 5 indicators
+        default=list(all_indicators)[:5]
     )
 
     year_range = st.sidebar.slider(
@@ -179,29 +219,3 @@ if page == "Advanced Analysis":
     if not corr.empty:
         fig = px.imshow(corr, text_auto=True, color_continuous_scale='RdBu_r', title="Correlation Matrix")
         st.plotly_chart(fig, use_container_width=True)
-
-# --- About Page ---
-if page == "About":
-    st.title("📚 About this Project")
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Coat_of_arms_of_Sri_Lanka.svg/1200px-Coat_of_arms_of_Sri_Lanka.svg.png", width=150)
-
-    st.markdown("""
-    ## 🇱🇰 Sri Lanka Economic and Social Indicators Dashboard
-
-    This dashboard visualizes key economic and social indicators for Sri Lanka between 2000–2023.  
-    It allows dynamic analysis of all indicators through univariate, bivariate, and multivariate techniques.
-
-    ### Features:
-    - Interactive line charts and comparisons
-    - KPI metrics overview
-    - Distribution analysis
-    - Correlation heatmaps
-
-    **Built With:**  
-    - Python 🐍  
-    - Streamlit 🚀  
-    - Plotly 📈  
-
-    **Dataset Source:**  
-    [World Bank Combined Indicators for Sri Lanka (HDX)](https://data.humdata.org/dataset/world-bank-combined-indicators-for-sri-lanka)
-    """)
