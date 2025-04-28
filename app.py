@@ -90,7 +90,7 @@ if page == "Home":
     # Tabs
     tab1, tab2, tab3 = st.tabs(["Line Charts", "Comparative Analysis", "Indicators Deep Dive"])
 
-    # --- Tab 1: Line Charts ---
+    # Tab 1: Line Charts 
     with tab1:
         st.header("Trend Analysis")
         for indicator in selected_indicators:
