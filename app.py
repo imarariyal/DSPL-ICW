@@ -46,7 +46,7 @@ if page == "About":
     ### 🔍 Key Features:
     - 📈 Line charts to track trends
     - 🔁 Indicator comparisons
-    - 🧮 KPI summaries
+    - �� KPI summaries
     - 📊 Univariate, bivariate, multivariate visualisations
     - 📁 Raw data access
     - 🔥 Correlation insights
@@ -67,7 +67,6 @@ elif page == "Home":
     st.title("🇱🇰 Sri Lanka Indicators Dashboard")
     st.markdown("Explore Sri Lanka's key economic and social trends over time.")
 
-    # Sidebar filters
     st.sidebar.title("🔎 Filters")
     all_indicators = df['Indicator'].unique()
 
@@ -89,7 +88,6 @@ elif page == "Home":
 
     tab1, tab2, tab3 = st.tabs(["📈 Line Charts", "📊 Comparative Analysis", "🔍 Indicators Deep Dive"])
 
-    # --- Tab 1: Line Charts ---
     with tab1:
         st.subheader("📈 Trend Analysis")
         for indicator in selected_indicators:
@@ -103,7 +101,6 @@ elif page == "Home":
             fig.update_layout(hovermode="x unified")
             st.plotly_chart(fig, use_container_width=True)
 
-    # --- Tab 2: Comparative Analysis ---
     with tab2:
         st.subheader("📊 Compare Selected Indicators")
         if len(selected_indicators) >= 2:
@@ -130,7 +127,6 @@ elif page == "Home":
         else:
             st.warning("⚠️ Please select at least two indicators for comparison.")
 
-    # --- Tab 3: Deep Dive ---
     with tab3:
         st.subheader("🔍 Multiple Indicators Overview")
         if not filtered_df.empty:
@@ -146,13 +142,11 @@ elif page == "Home":
         else:
             st.warning("⚠️ No data available for the selected filters.")
 
-    # --- KPIs ---
     st.markdown("---")
     st.subheader("📌 Key Metrics")
     if not filtered_df.empty:
         latest_year = filtered_df['Year'].max()
         latest_data = filtered_df[filtered_df['Year'] == latest_year]
-
         cols = st.columns(min(4, len(latest_data)))
         for col, row in zip(cols, latest_data.itertuples()):
             col.markdown(f"""
@@ -164,7 +158,6 @@ elif page == "Home":
     else:
         st.info("No KPI data to display.")
 
-    # --- Raw Data Table ---
     st.markdown("---")
     st.subheader("📁 Raw Data Table")
     st.dataframe(filtered_df.sort_values(["Indicator", "Year"]), use_container_width=True)
@@ -173,7 +166,6 @@ elif page == "Home":
 elif page == "Advanced Analysis":
     st.title("📊 Advanced Statistical Analysis")
 
-    # --- Univariate ---
     st.subheader("📌 Univariate Analysis")
     selected_uni = st.multiselect(
         "Select Indicators for Histogram:",
@@ -191,7 +183,6 @@ elif page == "Advanced Analysis":
 
     st.markdown("---")
 
-    # --- Bivariate ---
     st.subheader("🔗 Bivariate Analysis")
     col1, col2 = st.columns(2)
     with col1:
@@ -216,8 +207,7 @@ elif page == "Advanced Analysis":
 
     st.markdown("---")
 
-    # --- Multivariate ---
-    st.subheader("📌 Correlation Heatmap")
+    st.subheader("📊 Correlation Heatmap")
     selected_multi = st.multiselect(
         "Select indicators for correlation matrix:",
         options=df['Indicator'].unique(),
