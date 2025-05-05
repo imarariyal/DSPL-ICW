@@ -48,7 +48,7 @@ if page == "About":
     - Python, Streamlit, Plotly, Pandas
 
     **Author:** Imara Riyal  
-    **Student ID:** 20231001
+    **Student ID:** 20233219 | w2090885
     """)
 
 #Home Page 
