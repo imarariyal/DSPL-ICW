@@ -24,7 +24,7 @@ if page == "About":
     st.title("📚 About this Dashboard")
     st.image(
         "https://cdn-wordpress-info.futurelearn.com/wp-content/uploads/how-does-the-economy-work-606x303.jpg.webp",
-        use_column_width=True
+        use_container_width=True
     )
     st.markdown("""
     ## 🇱🇰 Sri Lanka Economic and Social Indicators Dashboard
