@@ -13,18 +13,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Light Mode Plotly Theme ---
-px.defaults.template = "plotly_white"
-
-# --- Color Palette (Light Theme) ---
-COLOR_PRIMARY = "#4B9CD3"
-COLOR_SECONDARY = "#A2D2FF"
-COLOR_POSITIVE = "#56C596"
-COLOR_WARNING = "#F4A261"
-COLOR_NEGATIVE = "#E76F51"
-COLOR_TEXT = "#2E2E2E"
-COLOR_BG_SECTION = "#F9F9F9"
-
 # --- Load data ---
 df = pd.read_csv('cleaned_indicators_lka.csv')
 
@@ -46,7 +34,7 @@ if page == "About":
     ### 🔍 Key Features:
     - 📈 Line charts to track trends
     - 🔁 Indicator comparisons
-    - �� KPI summaries
+    - 📌 KPI summaries
     - 📊 Univariate, bivariate, multivariate visualisations
     - 📁 Raw data access
     - 🔥 Correlation insights
@@ -92,12 +80,7 @@ elif page == "Home":
         st.subheader("📈 Trend Analysis")
         for indicator in selected_indicators:
             chart_df = filtered_df[filtered_df['Indicator'] == indicator]
-            fig = px.line(
-                chart_df, x='Year', y='Value',
-                title=f"{indicator} Over Time", markers=True,
-                line_shape='linear'
-            )
-            fig.update_traces(line=dict(color=COLOR_PRIMARY), marker=dict(color=COLOR_SECONDARY))
+            fig = px.line(chart_df, x='Year', y='Value', title=f"{indicator} Over Time", markers=True)
             fig.update_layout(hovermode="x unified")
             st.plotly_chart(fig, use_container_width=True)
 
@@ -116,8 +99,6 @@ elif page == "Home":
                     go.Scatter(
                         x=chart_df['Year'], y=chart_df['Value'],
                         mode='lines+markers',
-                        marker=dict(color=COLOR_SECONDARY),
-                        line=dict(color=COLOR_PRIMARY),
                         name=indicator
                     ),
                     row=i, col=1
@@ -134,7 +115,6 @@ elif page == "Home":
                 filtered_df,
                 x="Year", y="Value",
                 color="Indicator", markers=True,
-                color_discrete_sequence=[COLOR_PRIMARY, COLOR_SECONDARY, COLOR_POSITIVE, COLOR_WARNING, COLOR_NEGATIVE],
                 title="Selected Indicators Over Time"
             )
             fig.update_layout(hovermode='x unified')
@@ -149,12 +129,7 @@ elif page == "Home":
         latest_data = filtered_df[filtered_df['Year'] == latest_year]
         cols = st.columns(min(4, len(latest_data)))
         for col, row in zip(cols, latest_data.itertuples()):
-            col.markdown(f"""
-                <div style='background-color:{COLOR_BG_SECTION}; padding:1rem; border-radius:10px'>
-                    <h4 style='color:{COLOR_TEXT}; margin-bottom:0.2rem'>{row.Indicator} ({int(row.Year)})</h4>
-                    <h2 style='color:{COLOR_PRIMARY}; margin-top:0rem'>{row.Value:,.2f}</h2>
-                </div>
-            """, unsafe_allow_html=True)
+            col.metric(f"{row.Indicator} ({int(row.Year)})", f"{row.Value:,.2f}")
     else:
         st.info("No KPI data to display.")
 
@@ -174,11 +149,7 @@ elif page == "Advanced Analysis":
     )
     for indicator in selected_uni:
         chart_df = df[df['Indicator'] == indicator]
-        fig = px.histogram(
-            chart_df, x='Value', nbins=30,
-            title=f"Distribution: {indicator}",
-            color_discrete_sequence=[COLOR_PRIMARY]
-        )
+        fig = px.histogram(chart_df, x='Value', nbins=30, title=f"Distribution: {indicator}")
         st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("---")
@@ -200,8 +171,7 @@ elif page == "Advanced Analysis":
             x='Value_X', y='Value_Y',
             trendline='ols',
             labels={'Value_X': x_indicator, 'Value_Y': y_indicator},
-            title=f"{x_indicator} vs {y_indicator}",
-            color_discrete_sequence=[COLOR_POSITIVE]
+            title=f"{x_indicator} vs {y_indicator}"
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -224,5 +194,3 @@ elif page == "Advanced Analysis":
             title="Correlation Matrix (Multivariate)"
         )
         st.plotly_chart(fig, use_container_width=True)
-
-
