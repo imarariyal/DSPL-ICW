@@ -1,11 +1,11 @@
-# --- Import libraries ---
+#import libraries 
 import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-# --- Page Config ---
+#Page Config
 st.set_page_config(
     page_title="Sri Lanka Indicators Dashboard",
     page_icon="🇱🇰",
@@ -13,13 +13,13 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Load data ---
+#Load data 
 df = pd.read_csv('cleaned_indicators_lka.csv')
 
-# --- Sidebar Navigation ---
+#Sidebar Navigation 
 page = st.sidebar.selectbox("📌 Navigation", ["About", "Home", "Advanced Analysis"])
 
-# --- About Page ---
+#About Page 
 if page == "About":
     st.title("📚 About this Dashboard")
     st.image(
@@ -32,26 +32,26 @@ if page == "About":
     This dashboard visualises key economic and social indicators for Sri Lanka (2000–2023) with interactive tools for analysis.
 
     ### 🔍 Key Features:
-    - 📈 Line charts to track trends
-    - 🔁 Indicator comparisons
-    - 📌 KPI summaries
-    - 📊 Univariate, bivariate, multivariate visualisations
-    - 📁 Raw data access
-    - 🔥 Correlation insights
+    - 📈 Line charts to track trends  
+    - 🔁 Indicator comparisons  
+    - 📌 KPI summaries  
+    - 📊 Univariate, bivariate, multivariate visualisations  
+    - 📁 Raw data access  
+    - 🔥 Correlation insights  
 
     ### 📊 Dataset:
-    - Source: [World Bank via HDX](https://data.humdata.org/dataset/world-bank-combined-indicators-for-sri-lanka)
-    - Covers GDP, inflation, exports/imports, life expectancy, and more.
+    - Source: [World Bank via HDX](https://data.humdata.org/dataset/world-bank-combined-indicators-for-sri-lanka)  
+    - Covers GDP, inflation, exports/imports, life expectancy, and more.  
     - Timeframe: 2000 to 2023
 
     ### 🛠 Built With:
     - Python, Streamlit, Plotly, Pandas
 
-    **Author:** Imara Riyal
-    **Student ID:** 20233219       
+    **Author:** Imara Riyal  
+    **Student ID:** 20231001
     """)
 
-# --- Home Page ---
+#Home Page 
 elif page == "Home":
     st.title("🇱🇰 Sri Lanka Indicators Dashboard")
     st.markdown("Explore Sri Lanka's key economic and social trends over time.")
@@ -138,7 +138,7 @@ elif page == "Home":
     st.subheader("📁 Raw Data Table")
     st.dataframe(filtered_df.sort_values(["Indicator", "Year"]), use_container_width=True)
 
-# --- Advanced Analysis ---
+#Advanced Analysis
 elif page == "Advanced Analysis":
     st.title("📊 Advanced Statistical Analysis")
 
